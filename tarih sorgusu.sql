@@ -1,0 +1,1 @@
+SELECT * FROM haber.dbo.Köse_Yazýlarý WHERE yayin_tarihi between '2009-01-01' and '2012-12-31' 

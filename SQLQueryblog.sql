@@ -1,0 +1,1 @@
+Select KategoriAdi + ' ('+CONVERT(NVARCHAR, COUNT(Makale.KategoriId))+')' As KategoriAdi From Makale RIGHT JOIN Kategori ON Kategori.KategoriId=Makale.KategoriId GROUP BY Makale.KategoriId,KategoriAdi,Sira ORDER BY Sira

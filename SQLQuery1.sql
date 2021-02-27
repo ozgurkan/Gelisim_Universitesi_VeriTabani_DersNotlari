@@ -1,0 +1,1 @@
+SELECT * FROM haberler.dbo.Haber_Yayýnlama WHERE haber_alt_türü_id=1 or haber_alt_türü_id=2
