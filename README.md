@@ -1,0 +1,1 @@
+# Gelisim_Universitesi_VeriTabani_DersNotlari
