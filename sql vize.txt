@@ -1,0 +1,114 @@
+/*--------------WHÝLE DÖNGÜSÜ 1.ÖRNEK------------------------*/
+declare @sayi int
+set @sayi=1;
+while(@sayi<11)
+Begin
+print (@sayi)
+set @sayi=@sayi+1
+End
+
+/*-------------WHÝLE DÖNGÜSÜ 2.ÖRNEK-------------------------*/
+declare @sayi1 int
+declare @isim nvarchar(50)
+set @sayi1=1;
+set @isim='özgür';
+while(@sayi1<11)
+Begin
+print convert(nvarchar,@sayi1)+'-'+(@isim)
+set @sayi1=@sayi1+1
+End
+
+
+/*---------------ÖÐRENCÝLER TABLOSU ÖRNEÐÝ-----------------------*/
+
+/*---------------ÖÐRENCÝLER idsi 4-7 arasýnda olan öðrencilerin not ortalamalarýný ekrana yazdýrýn-----------------------*/
+declare @say int
+set @say=4;
+declare @ortalama int
+while(@say<=7)
+Begin
+set @ortalama=((select Vize from Ogrenciler where OgrenciId=@say)*40/100+(select Final from Ogrenciler where OgrenciId=@say)*60/100)
+print @ortalama
+set @say=@say+1
+End
+
+
+/*---------------bütün öðrencilerin ortalaasýný hesaplayýp tabloya ekleyin-----------------------*/
+declare @say1 int
+set @say1=1;
+declare @ortalama1 int
+while(@say1<=9)
+Begin
+set @ortalama1=((select Vize from Ogrenciler where OgrenciId=@say1)*40/100+(select Final from Ogrenciler where OgrenciId=@say1)*60/100)
+Update Ogrenciler set Ortalama=@ortalama1 where OgrenciId=@say1
+set @say1=@say1+1
+End
+
+/*---------------Oratalamaya göre durumu geçti-kaldý yap 70 ve üstü geçti diðerleri kaldý-----------------------*/
+declare @say2 int
+set @say2=1;
+declare @ortalama2 int
+while(@say2<=9)
+Begin
+set @ortalama2=(select Ortalama from Ogrenciler where OgrenciId=@say2)
+
+if(@ortalama2>=70)
+Begin
+Update Ogrenciler set Durum='GEÇTÝ' where OgrenciId=@say2
+End
+else
+Begin
+Update Ogrenciler set Durum='KALDI' where OgrenciId=@say2
+End
+
+set @say2=@say2+1
+End
+
+
+/*---------------ORTALAMAYA GÖRE HARF NOTLARINI TABLOYA EKLEYÝN-----------------------*/
+declare @say3 int
+set @say3=1;
+declare @ortalama3 int
+while(@say3<=9)
+Begin
+set @ortalama3=(select Ortalama from Ogrenciler where OgrenciId=@say3)
+
+if(@ortalama3>=90)
+Begin
+Update Ogrenciler set HarfNotu='AA' where OgrenciId=@say3
+End
+else if(@ortalama3>=85 and @ortalama3<=89)
+Begin
+Update Ogrenciler set HarfNotu='BA' where OgrenciId=@say3
+End
+else if(@ortalama3>=75 and @ortalama3<=84)
+Begin
+Update Ogrenciler set HarfNotu='BB' where OgrenciId=@say3
+End
+else if(@ortalama3>=65 and @ortalama3<=74)
+Begin
+Update Ogrenciler set HarfNotu='CB' where OgrenciId=@say3
+End
+else if(@ortalama3>=60 and @ortalama3<=64)
+Begin
+Update Ogrenciler set HarfNotu='CC' where OgrenciId=@say3
+End
+else if(@ortalama3>=50 and @ortalama3<=59)
+Begin
+Update Ogrenciler set HarfNotu='DC' where OgrenciId=@say3
+End
+else if(@ortalama3>=45 and @ortalama3<=49)
+Begin
+Update Ogrenciler set HarfNotu='DD' where OgrenciId=@say3
+End
+else if(@ortalama3>=40 and @ortalama3<=44)
+Begin
+Update Ogrenciler set HarfNotu='FD' where OgrenciId=@say3
+End
+else if(@ortalama3>=0 and @ortalama3<=39)
+Begin
+Update Ogrenciler set HarfNotu='FF' where OgrenciId=@say3
+End
+
+set @say3=@say3+1
+End
